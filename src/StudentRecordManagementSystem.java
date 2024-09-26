@@ -57,6 +57,24 @@ class StudentManagement {
         }
         System.out.println("Error: Student ID not found!");
     }
+
+    static void deleteStudent(String id) {
+        for (Student student : studentList) {
+            if (student.id.equals(id)) {
+                studentList.remove(student);
+                System.out.println("Student deleted successfully!");
+            }
+        }
+    }
+
+    static void displayStudents() {
+        for (Student student : studentList) {
+            System.out.println("Student ID: " + student.id);
+            System.out.println("Student Name: " + student.name);
+            System.out.println("Student Age: " + student.age);
+            System.out.println("Student Grade: " + student.grade);
+        }
+    }
 }
 
 // Main class to provide the administrator interface
@@ -70,7 +88,9 @@ public class StudentRecordManagementSystem {
             System.out.println("1. Add New Student");
             System.out.println("2. Update Student Information");
             System.out.println("3. View Student Details");
-            System.out.println("4. Exit");
+            System.out.println("4. Delete Student Information");
+            System.out.println("5. See All Students");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             // Input validation handling
@@ -117,12 +137,22 @@ public class StudentRecordManagementSystem {
                     StudentManagement.viewStudent(viewId);
                     break;
                 case 4:
+                    scanner.nextLine();
+                    System.out.print("Enter student ID to delete: ");
+                    String deleteId = scanner.nextLine();
+                    StudentManagement.deleteStudent(deleteId);
+                    break;
+                case 5:
+                    scanner.nextLine();
+                    System.out.print("Showing All Students: ");
+                    StudentManagement.displayStudents();
+                case 6:
                     System.out.println("Exiting the system...");
                     break;
                 default:
                     System.out.println("Invalid choice! Please try again.");
             }
-        } while (choice != 4);
+        } while (choice != 6);
 
         scanner.close();
     }
